@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import {
   PieChart,
   Pie,
@@ -21,9 +22,19 @@ const data = [
 ]
 
 export function IPRevenuePieChart() {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return <div className="h-[400px] w-full bg-white/50 backdrop-blur-sm rounded-xl border border-slate-100 animate-pulse" />
+  }
+
   return (
     <div className="h-[400px] w-full bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-slate-100">
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
         <PieChart margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <Pie
             data={data}

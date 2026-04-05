@@ -10,9 +10,11 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { domToPng } from "modern-screenshot"
-import { RevenueGrowthChart } from "@/components/charts/RevenueGrowthChart"
-import { IPRevenuePieChart } from "@/components/charts/IPRevenuePieChart"
-import { MarginChart } from "@/components/charts/MarginChart"
+import dynamic from "next/dynamic"
+
+const RevenueGrowthChart = dynamic(() => import("@/components/charts/RevenueGrowthChart").then(mod => mod.RevenueGrowthChart), { ssr: false })
+const IPRevenuePieChart = dynamic(() => import("@/components/charts/IPRevenuePieChart").then(mod => mod.IPRevenuePieChart), { ssr: false })
+const MarginChart = dynamic(() => import("@/components/charts/MarginChart").then(mod => mod.MarginChart), { ssr: false })
 
 // --- Reusable UI Components ---
 

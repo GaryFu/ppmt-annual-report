@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import {
   Bar,
   CartesianGrid,
@@ -26,9 +27,19 @@ const data = [
 ]
 
 export function RevenueGrowthChart() {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return <div className="h-[400px] w-full bg-white/50 backdrop-blur-sm rounded-xl border border-slate-100 animate-pulse" />
+  }
+
   return (
     <div className="h-[400px] w-full bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-slate-100">
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
         <ComposedChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
           <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fill: '#64748b' }} dy={10} />
